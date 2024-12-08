@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: hello-gitops
-  name: hello-gitops
+    app: githubactions-task
+  name: githubactions-task
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: hello-gitops
+      app: githubactions-task
   template:
     metadata:
       labels:
-        app: hello-gitops
+        app: githubactions-task
     spec:
       containers:
-        - image: hello-gitops
-          name: hello-gitops
+        - image: githubactions-task
+          name: githubactions-task
           ports:
             - name: http
               containerPort: 8050

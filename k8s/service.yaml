@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: hello-gitops
-  name: hello-gitops
+    app: githubactions-task
+  name: githubactions-task
 spec:
   ports:
     - name: http
       port: 8050
       targetPort: http
   selector:
-    app: hello-gitops
+    app: githubactions-task
   type: ClusterIP
