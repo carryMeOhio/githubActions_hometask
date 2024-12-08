@@ -4,8 +4,8 @@ resources:
 - deployment.yaml
 - service.yaml
 - ingress.yaml
-namespace: hello-gitops
+namespace: githubactions-task
 images:
-- name: hello-gitops
-  newName: elisska/hello-gitops
+- name: githubactions-task
+  newName: kdbrener/githubactions-task
   newTag: c231f4bf738535df912638b2f42b820fe250d0a6

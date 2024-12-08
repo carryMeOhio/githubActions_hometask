@@ -83,18 +83,6 @@ jobs:
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
 
-    # - name: Build and push
-    #   uses: docker/build-push-action@v5
-    #   with:
-    #     context: ./app 
-    #     file: ./app/Dockerfile
-    #     builder: ${{ steps.buildx.outputs.name }}
-    #     push: true
-    #     tags: ${{ secrets.DOCKER_USERNAME }}/hello-gitops:latest
-    #     platforms: linux/amd64,linux/arm64
-    #     cache-from: type=local,src=/tmp/.buildx-cache
-    #     cache-to: type=local,dest=/tmp/.buildx-cache
-
   deploy: 
     name: Deploy
     runs-on: ubuntu-latest
