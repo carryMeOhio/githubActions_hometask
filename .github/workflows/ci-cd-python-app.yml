@@ -62,22 +62,35 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
       
-    - name: Echo Docker Username
-      run: |
-        echo `Docker Username: ${{ secrets.DOCKER_USERNAME}}`
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
     - name: Build and push
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
         context: ./app 
         file: ./app/Dockerfile
-        builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/hello-gitops:1.1.0, ${{ secrets.DOCKER_USERNAME }}/hello-gitops:latest
+        tags: user/app:latest
         platforms: linux/amd64,linux/arm64
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
+
+    # - name: Build and push
+    #   uses: docker/build-push-action@v5
+    #   with:
+    #     context: ./app 
+    #     file: ./app/Dockerfile
+    #     builder: ${{ steps.buildx.outputs.name }}
+    #     push: true
+    #     tags: ${{ secrets.DOCKER_USERNAME }}/hello-gitops:latest
+    #     platforms: linux/amd64,linux/arm64
+    #     cache-from: type=local,src=/tmp/.buildx-cache
+    #     cache-to: type=local,dest=/tmp/.buildx-cache
 
   deploy: 
     name: Deploy
@@ -139,7 +152,7 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
        cd k8s
-       kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:1.1.0
+       kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:latest
        cat kustomization.yaml
     
     - name: Deploy updated Kubernetes resources
