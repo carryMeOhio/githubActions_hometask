@@ -8,3 +8,4 @@ images:
   - name: githubactions-task
     newName: kdbrener/githubactions-task
     newTag: latest
+
