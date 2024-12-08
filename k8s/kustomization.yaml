@@ -4,8 +4,11 @@ resources:
 - deployment.yaml
 - service.yaml
 - ingress.yaml
-namespace: githubactions-task
+namespace: python-app-blue
 images:
+- name: githubactions-task
+  newName: kdbrener/githubactions-task
+  newTag: latest
 - name: githubactions-task
   newName: kdbrener/githubactions-task
   newTag: c231f4bf738535df912638b2f42b820fe250d0a6
