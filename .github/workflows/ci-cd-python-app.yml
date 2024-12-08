@@ -135,7 +135,7 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
        cd k8s
-       kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
+       kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:1.1.0
        cat kustomization.yaml
     
     - name: Deploy updated Kubernetes resources
