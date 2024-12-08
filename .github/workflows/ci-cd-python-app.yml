@@ -75,7 +75,7 @@ jobs:
         context: ./app 
         file: ./app/Dockerfile
         push: true
-        tags: user/app:latest
+        tags: kdbrener/githubactions-task:latest
         platforms: linux/amd64,linux/arm64
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
@@ -152,7 +152,7 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
        cd k8s
-       kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:latest
+       kustomize edit set image githubactions-task=kdbrener/githubactions-task:latest
        cat kustomization.yaml
     
     - name: Deploy updated Kubernetes resources
