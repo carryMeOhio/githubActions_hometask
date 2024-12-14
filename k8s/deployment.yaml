@@ -9,12 +9,12 @@ spec:
   selector:
     matchLabels:
       app: githubactions-task
-      version: "2.0.0"
+      version: "latest"
   template:
     metadata:
       labels:
         app: githubactions-task
-        version: "2.0.0"
+        version: "latest"
     spec:
       containers:
         - image: githubactions-task:latest

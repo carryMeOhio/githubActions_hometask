@@ -161,18 +161,12 @@ jobs:
         kubectl apply -k k8s/ 
 
     - name: Redirect Traffic to New Version
-      run: kubectl patch service githubactions-task -n ${{ env.NEW_NAMESPACE }} -p '{"spec":{"selector":{"version":"2.0.0"}}}'
+      run: kubectl patch service githubactions-task -n ${{ env.NEW_NAMESPACE }} -p '{"spec":{"selector":{"version":"latest"}}}'
 
     - name: Confirm and Cleanup
       run: |
         echo "Traffic has been redirected to the new version"
-   
-    # DO SOME CHECKS HERE BEFORE COMMIT
-    #- name: Deploy updated Kubernetes resources
-    #  run: |
-    #    kubectl apply -k k8s/
 
-    # REMOVE OLD DEPLOYMENT!!
     - name: Remove old namespace
       run: |
         namespacePresentOld=`kubectl get ns | grep ${{ env.OLD_NAMESPACE }} | wc -l`
