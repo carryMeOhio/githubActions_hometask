@@ -161,7 +161,7 @@ jobs:
         kubectl apply -k k8s/ 
 
     - name: Redirect Traffic to New Version
-      run: kubectl patch service githubactions-task -n ${{ env.NEW_NAMESPACE }} -p '{"spec":{"selector":{"version":"v2.0.0"}}}'
+      run: kubectl patch service githubactions-task -n ${{ env.NEW_NAMESPACE }} -p '{"spec":{"selector":{"version":"2.0.0"}}}'
 
     - name: Confirm and Cleanup
       run: |
