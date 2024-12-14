@@ -159,6 +159,13 @@ jobs:
     - name: Deploy updated Kubernetes resources
       run: |
         kubectl apply -k k8s/ 
+
+    - name: Redirect Traffic to New Version
+      run: kubectl patch service githubactions-task -p '{"spec":{"selector":{"version":"v2.0.0"}}}'
+
+    - name: Confirm and Cleanup
+      run: |
+        echo "Traffic has been redirected to the new version"
    
     # DO SOME CHECKS HERE BEFORE COMMIT
     #- name: Deploy updated Kubernetes resources
