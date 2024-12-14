@@ -78,7 +78,7 @@ jobs:
         context: ./app 
         file: ./app/Dockerfile
         push: true
-        tags: kdbrener/githubactions-task:latest
+        tags: kdbrener/githubactions-task:${{ github.sha }}
         platforms: linux/amd64,linux/arm64
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
@@ -153,15 +153,16 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
        cd k8s
-       kustomize edit set image githubactions-task=kdbrener/githubactions-task:latest
+       kustomize edit set image githubactions-task=kdbrener/githubactions-task:${{ github.sha }}
        cat kustomization.yaml
     
     - name: Deploy updated Kubernetes resources
       run: |
+        sed -i "s/<TAG>/${{ github.sha }}/" ./k8s/deployment.yaml
         kubectl apply -k k8s/ 
 
     - name: Redirect Traffic to New Version
-      run: kubectl patch service githubactions-task -n ${{ env.NEW_NAMESPACE }} -p '{"spec":{"selector":{"version":"latest"}}}'
+      run: kubectl patch service githubactions-task -n ${{ env.NEW_NAMESPACE }} -p '{"spec":{"selector":{"version":"2.0.0"}}}'
 
     - name: Confirm and Cleanup
       run: |
