@@ -8,4 +8,4 @@ images:
 - name: githubactions-task
   newName: kdbrener/githubactions-task
   newTag: latest
-namespace: python-app-green
+namespace: python-app-blue
