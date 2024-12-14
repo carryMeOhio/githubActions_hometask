@@ -17,7 +17,7 @@ spec:
         version: "latest"
     spec:
       containers:
-        - image: githubactions-task:<TAG>
+        - image: githubactions-task:4f19a1e7bb0713bbe41ee4881d30965400aa0cfc
           name: githubactions-task
           ports:
             - name: http

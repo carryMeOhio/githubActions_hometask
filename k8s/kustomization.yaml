@@ -7,5 +7,5 @@ resources:
 images:
 - name: githubactions-task
   newName: kdbrener/githubactions-task
-  newTag: latest
-namespace: python-app-green
+  newTag: 4f19a1e7bb0713bbe41ee4881d30965400aa0cfc
+namespace: python-app-blue
